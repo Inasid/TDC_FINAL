@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@700&family=Noto+Nastaliq+Urdu:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <style>
         * {
@@ -16,7 +17,7 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             background: #1a1a2e;
             min-height: 100vh;
             padding: 0;
@@ -24,10 +25,11 @@
         }
 
         .landing-banner {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: darkorchid;
             padding: 60px 40px;
             text-align: center;
             border-bottom: 1px solid #2a2a4a;
+            max-height: 100vh;
         }
 
         .landing-banner h1 {
@@ -874,8 +876,159 @@
             render();
         });
 
-        document.getElementById('downloadBtn').addEventListener('click', () => {
-            alert('To download:\n\n1. Right-click on poster → "Save Image As..."\n2. Or press Ctrl+P to save as PDF');
+        document.getElementById('downloadBtn').addEventListener('click', async () => {
+            const poster = document.getElementById('posterContainer');
+            const downloadBtn = document.getElementById('downloadBtn');
+            
+            // Stop animation temporarily
+            if (state.bgGridAnimationInterval) {
+                clearInterval(state.bgGridAnimationInterval);
+            }
+            
+            downloadBtn.textContent = 'Generating...';
+            downloadBtn.disabled = true;
+            
+            try {
+                // Get current grid dimensions
+                const gridDims = PIXEL_SIZE_PRESETS[state.pixelSize];
+                const GRID_WIDTH = gridDims.width;
+                const GRID_HEIGHT = gridDims.height;
+                
+                // Create a high-res canvas
+                const scale = 2;
+                const canvasWidth = 500 * scale;
+                const canvasHeight = 700 * scale;
+                const cellWidth = canvasWidth / GRID_WIDTH;
+                const cellHeight = canvasHeight / GRID_HEIGHT;
+                
+                const exportCanvas = document.createElement('canvas');
+                exportCanvas.width = canvasWidth;
+                exportCanvas.height = canvasHeight;
+                const ctx = exportCanvas.getContext('2d');
+                
+                // Fill white background
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+                
+                // Get all cells and render them
+                const cells = poster.querySelectorAll('.grid-cell');
+                
+                // Create a function to load and draw SVG
+                const drawCell = (cellIndex) => {
+                    return new Promise((resolve) => {
+                        const cell = cells[cellIndex];
+                        const bgImage = cell.style.backgroundImage;
+                        
+                        if (bgImage && bgImage.startsWith("url(")) {
+                            // Extract SVG data
+                            let svgData = bgImage.slice(5, -2); // Remove url(' and ')
+                            svgData = decodeURIComponent(svgData.replace('data:image/svg+xml;utf8,', ''));
+                            
+                            // Create image from SVG
+                            const img = new Image();
+                            const svgBlob = new Blob([svgData], { type: 'image/svg+xml' });
+                            const url = URL.createObjectURL(svgBlob);
+                            
+                            img.onload = () => {
+                                const row = Math.floor(cellIndex / GRID_WIDTH);
+                                const col = cellIndex % GRID_WIDTH;
+                                const x = col * cellWidth;
+                                const y = row * cellHeight;
+                                
+                                ctx.drawImage(img, x, y, cellWidth, cellHeight);
+                                URL.revokeObjectURL(url);
+                                resolve();
+                            };
+                            
+                            img.onerror = () => {
+                                URL.revokeObjectURL(url);
+                                resolve();
+                            };
+                            
+                            img.src = url;
+                        } else {
+                            resolve();
+                        }
+                    });
+                };
+                
+                // Draw all cells
+                for (let i = 0; i < cells.length; i++) {
+                    await drawCell(i);
+                }
+                
+                // Draw body copy box
+                if (state.bodyCopy.trim()) {
+                    const padding = 24 * scale;
+                    const boxPadding = 20 * scale;
+                    const boxHeight = 100 * scale;
+                    const boxY = canvasHeight - padding - boxHeight;
+                    
+                    // Draw box background
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+                    ctx.strokeStyle = '#d0d0d0';
+                    ctx.lineWidth = 2 * scale;
+                    
+                    const boxX = padding;
+                    const boxWidth = canvasWidth - (padding * 2);
+                    
+                    // Rounded rectangle
+                    const radius = 8 * scale;
+                    ctx.beginPath();
+                    ctx.moveTo(boxX + radius, boxY);
+                    ctx.lineTo(boxX + boxWidth - radius, boxY);
+                    ctx.quadraticCurveTo(boxX + boxWidth, boxY, boxX + boxWidth, boxY + radius);
+                    ctx.lineTo(boxX + boxWidth, boxY + boxHeight - radius);
+                    ctx.quadraticCurveTo(boxX + boxWidth, boxY + boxHeight, boxX + boxWidth - radius, boxY + boxHeight);
+                    ctx.lineTo(boxX + radius, boxY + boxHeight);
+                    ctx.quadraticCurveTo(boxX, boxY + boxHeight, boxX, boxY + boxHeight - radius);
+                    ctx.lineTo(boxX, boxY + radius);
+                    ctx.quadraticCurveTo(boxX, boxY, boxX + radius, boxY);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+                    
+                    // Draw text
+                    ctx.fillStyle = '#333333';
+                    ctx.font = `${11 * scale}px Arial, sans-serif`;
+                    
+                    // Word wrap
+                    const words = state.bodyCopy.split(' ');
+                    let line = '';
+                    let y = boxY + boxPadding + (12 * scale);
+                    const maxWidth = boxWidth - (boxPadding * 2);
+                    const lineHeight = 14 * scale;
+                    
+                    for (let word of words) {
+                        const testLine = line + word + ' ';
+                        const metrics = ctx.measureText(testLine);
+                        if (metrics.width > maxWidth && line !== '') {
+                            ctx.fillText(line.trim(), boxX + boxPadding, y);
+                            line = word + ' ';
+                            y += lineHeight;
+                        } else {
+                            line = testLine;
+                        }
+                    }
+                    ctx.fillText(line.trim(), boxX + boxPadding, y);
+                }
+                
+                // Download
+                const link = document.createElement('a');
+                link.download = 'lucknow-lattice-poster.png';
+                link.href = exportCanvas.toDataURL('image/png', 1.0);
+                link.click();
+                
+            } catch (error) {
+                console.error('Download failed:', error);
+                alert('Download failed. Please try again.');
+            }
+            
+            downloadBtn.textContent = 'Download';
+            downloadBtn.disabled = false;
+            
+            // Restart animation
+            startAnimation();
         });
 
         setTimeout(() => {
