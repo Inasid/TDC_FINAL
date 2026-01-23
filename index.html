@@ -17,7 +17,7 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
             background: #E35645;
             min-height: 100vh;
             padding: 0;
@@ -608,25 +608,25 @@
             <h2>Pattern Mix</h2>
 
             <div class="control-group">
-                <label><span class="pattern-icon" id="patternIcon1"></span>Jali Diamond</label>
+                <label><span class="pattern-icon" id="patternIcon1"></span>Contemporary - Gomtinagar/Indirinagar</label>
                 <input type="range" id="pattern1" min="0" max="100" step="5" value="25">
                 <div class="slider-value"><span id="pattern1Value">25</span>%</div>
             </div>
 
             <div class="control-group">
-                <label><span class="pattern-icon" id="patternIcon2"></span>Chikan Buti</label>
+                <label><span class="pattern-icon" id="patternIcon2"></span>Indo Indo-Grecian - Hazratganj/Kaiserbag/label>
                 <input type="range" id="pattern2" min="0" max="100" step="5" value="25">
                 <div class="slider-value"><span id="pattern2Value">25</span>%</div>
             </div>
 
             <div class="control-group">
-                <label><span class="pattern-icon" id="patternIcon3"></span>Eight-pointed Star</label>
+                <label><span class="pattern-icon" id="patternIcon3"></span>Nawabi Mughal - Chowk/Aminabad/Husainabad</label>
                 <input type="range" id="pattern3" min="0" max="100" step="5" value="25">
                 <div class="slider-value"><span id="pattern3Value">25</span>%</div>
             </div>
 
             <div class="control-group">
-                <label><span class="pattern-icon" id="patternIcon4"></span>Floral Star</label>
+                <label><span class="pattern-icon" id="patternIcon4"></span>Colonial - Civil lines/Residency</label>
                 <input type="range" id="pattern4" min="0" max="100" step="5" value="25">
                 <div class="slider-value"><span id="pattern4Value">25</span>%</div>
             </div>
@@ -636,11 +636,11 @@
             <div class="divider"></div>
 
             <h2>Explore Lucknow</h2>
-            <p style="color: #EBE1D8; font-size: 12px; margin-bottom: 12px;">Each pattern represents a different architectural era and neighborhood of Lucknow.</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-bottom: 12px;">Each pattern represents a different architectural era and neighborhood of Lucknow.</p>
             
             <div class="control-group">
                 <label>Select Neighborhood</label>
-                <select id="neighborhoodSelect" style="width: 100%; padding: 10px; background: #E35645; border: 2px solid #EBE1D8; border-radius: 4px; color: #e0e0e0; font-size: 14px;">
+                <select id="neighborhoodSelect" style="width: 100%; padding: 10px; background: #E35645; border: 2px solid #4a4a6a; border-radius: 4px; color: #e0e0e0; font-size: 14px;">
                     <option value="">-- Choose a neighborhood --</option>
                     <option value="nawabi"> Chowk / Husainabad (Nawabi/Mughal)</option>
                     <option value="indogrecian"> Kaiserbagh / Hazratganj (Indo-Grecian)</option>
@@ -953,7 +953,7 @@
                 const englishLines = state.textEnglish.split('\n');
                 for (const line of englishLines) {
                     if (!line.trim()) continue;
-                    const gridData = renderTextToGrid(line.toUpperCase(), 'Pixelify Sans', 18);
+                    const gridData = renderTextToGrid(line.toUpperCase(), 'Courier', 18);
                     if (gridData) {
                         const { grid } = gridData;
                         let currentCol = Math.max(0, Math.floor((GRID_WIDTH - grid[0].length) / 2));
