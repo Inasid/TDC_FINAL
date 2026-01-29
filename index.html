@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
     <title>Trilingual Grid Poster</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@700&family=Noto+Nastaliq+Urdu:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
+     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
         * {
             margin: 0;
@@ -17,34 +18,39 @@
         }
 
         body {
-            font-family: 'Times New Roman', Times, serif;
-            background: #1a1a2e;
+            font-family: 'Courier New', Courier, monospace;
+            background: #E35645;
             min-height: 100vh;
             padding: 0;
             margin: 0;
         }
 
         .landing-banner {
-            background: darkorchid;
-            padding: 60px 40px;
+            background: #E35645;
+            padding: 80px 40px;
             text-align: center;
-            border-bottom: 1px solid #2a2a4a;
-            max-height: 100vh;
+            border-bottom: 1px solid #EBE1D8;
         }
 
-        .landing-banner h1 {
-            font-size: 48px;
-            color: #ffffff;
-            margin-bottom: 16px;
-            font-weight: 700;
-            letter-spacing: 2px;
+        .banner-title {
+            display: inline-grid;
+            gap: 1px;
+            margin-bottom: 40px;
+        }
+
+        .banner-title .banner-cell {
+            width: 8px;
+            height: 8px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.3s ease;
         }
 
         .landing-banner .subtitle {
-            font-size: 18px;
-            color: #b0b0b0;
+            font-size: 16px;
+            color: #EBE1D8;
             margin-bottom: 32px;
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
             line-height: 1.6;
@@ -58,18 +64,18 @@
         }
 
         .landing-banner .links a {
-            color: #4ecdc4;
+            color: #EBE1D8;
             text-decoration: none;
             font-size: 16px;
             padding: 12px 24px;
-            border: 1px solid #4ecdc4;
+            border: 1px solid #EBE1D8;
             border-radius: 4px;
             transition: all 0.3s ease;
         }
 
         .landing-banner .links a:hover {
-            background: #4ecdc4;
-            color: #1a1a2e;
+            background: #9CCAA6;
+            color: #E35645;
         }
 
         .generator-section {
@@ -87,25 +93,26 @@
         }
 
         .control-panel {
-            width: 320px;
-            background-color: #16213e;
+            width: 350px;
+            background-color: #E35645;
             padding: 24px;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: none;
             height: fit-content;
             max-height: 90vh;
             overflow-y: auto;
+            border: 1px solid #EBE1D8;
         }
 
         h1 {
-            color: #e0e0e0;
+            color: #EBE1D8;
             font-size: 24px;
             margin-bottom: 24px;
             text-align: center;
         }
 
         h2 {
-            color: #b0b0b0;
+            color: #EBE1D8;
             font-size: 16px;
             margin: 20px 0 12px 0;
             text-transform: uppercase;
@@ -114,11 +121,12 @@
 
         .control-group {
             margin-bottom: 20px;
+            padding: 10px;
         }
 
         label {
             display: block;
-            color: #e0e0e0;
+            color: #EBE1D8;
             font-size: 14px;
             margin-bottom: 8px;
         }
@@ -126,10 +134,10 @@
         input[type="text"], textarea {
             width: 100%;
             padding: 10px;
-            border: 2px solid #4a4a6a;
+            border: 2px solid #EBE1D8;
             border-radius: 4px;
             font-size: 14px;
-            background-color: #2a2a4a;
+            background-color: #E35645;
             color: white;
             font-family: inherit;
         }
@@ -142,44 +150,150 @@
 
         input[type="text"]:focus, textarea:focus {
             outline: none;
-            border-color: #5a67d8;
+            border-color: #EBE1D8;
         }
 
         input[type="range"] {
+               appearance: none;
             width: 100%;
             height: 8px;
-            background: #3d3d5c;
+            background: #E35645;
+              border: 1px solid #EBE1D8;
             border-radius: 4px;
             outline: none;
         }
 
         input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
+           
+               appearance: none;
             width: 20px;
             height: 20px;
-            background: white;
+              background: #E35645;
+              border: 1px solid #EBE1D8;
             cursor: pointer;
             border-radius: 50%;
         }
 
         input[type="range"]::-moz-range-thumb {
+          appearance: none;
             width: 20px;
             height: 20px;
-            background: white;
+              background: #E35645;
+              border: 1px solid #EBE1D8;
             cursor: pointer;
             border-radius: 50%;
             border: none;
         }
 
         .slider-value {
-            color: #9ca3af;
+            color: #EBE1D8;
             font-size: 12px;
             margin-top: 4px;
         }
 
+        .pattern-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 3px;
+            cursor: help;
+            position: relative;
+        }
+
+        .pattern-icon:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #9CCAA6;
+            color: #4a4a6a;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            white-space: nowrap;
+            z-index: 100;
+            margin-left: 8px;
+            border: none;
+        }
+
+        .neighborhood-info {
+            background: #E35645;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 12px;
+            border: 1px solid #EBE1D8;
+        }
+
+        .neighborhood-info .info-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .neighborhood-info h3 {
+            color: #EBE1D8;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .neighborhood-info p {
+            color: #EBE1D8;
+            font-size: 12px;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .neighborhood-info #infoStyle {
+            color: #EBE1D8;
+            font-size: 11px;
+            font-style: italic;
+        }
+
+        .neighborhood-info #infoDescription {
+            margin: 12px 0;
+        }
+
+        .pattern-icon-large {
+            width: 40px;
+            height: 40px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            flex-shrink: 0;
+        }
+
+        .heritage-sites {
+            background: #9CCAA6;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+
+        .heritage-sites strong {
+            color: #383838;
+            font-size: 12px;
+        }
+
+        .heritage-sites ul {
+            margin: 8px 0 0 0;
+            padding-left: 20px;
+            color: #383838;
+            font-size: 11px;
+        }
+
+        .heritage-sites li {
+            margin: 4px 0;
+        }
+
         .divider {
-            border-top: 1px solid #4a4a6a;
+            border-top: 1px solid #EBE1D8;
             margin: 24px 0;
         }
 
@@ -193,7 +307,7 @@
         .preset-btn {
             width: 28px;
             height: 28px;
-            border: 2px solid #5a67d8;
+            border: 2px solid #EBE1D8;
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.2s;
@@ -201,11 +315,11 @@
 
         .preset-btn:hover {
             transform: scale(1.1);
-            border-color: #7c8ff0;
+            border-color: #EBE1D8;
         }
 
         .preset-btn.active {
-            border: 3px solid white;
+            border: 3px solid #EBE1D8;
             box-shadow: 0 0 8px rgba(90, 103, 216, 0.6);
         }
 
@@ -268,11 +382,13 @@
         }
 
         .download-btn {
+            appearance: none;
             width: 100%;
             padding: 12px;
-            background-color: #5a67d8;
+            background-color: #E35645;
+            border: 1px solid #EBE1D8;
             color: white;
-            border: none;
+            
             border-radius: 4px;
             font-size: 14px;
             font-weight: 600;
@@ -281,7 +397,8 @@
         }
 
         .download-btn:hover {
-            background-color: #4c51bf;
+            background-color: #EBE1D8;
+            color: black;
         }
 
         .info-text {
@@ -325,12 +442,12 @@
 
         @media (max-width: 768px) {
             .landing-banner {
-                padding: 40px 20px;
+                padding: 60px 20px;
             }
 
-            .landing-banner h1 {
-                font-size: 32px;
-                letter-spacing: 1px;
+            .banner-title .banner-cell {
+                width: 5px;
+                height: 5px;
             }
 
             .landing-banner .subtitle {
@@ -389,8 +506,9 @@
         }
 
         @media (max-width: 480px) {
-            .landing-banner h1 {
-                font-size: 26px;
+            .banner-title .banner-cell {
+                width: 3px;
+                height: 3px;
             }
 
             .landing-banner .subtitle {
@@ -422,8 +540,8 @@
     
     <!-- Landing Banner -->
     <div class="landing-banner">
-        <h1>Lucknow Lattice</h1>
-        <p class="subtitle">A generative typography project celebrating the architectural heritage of Lucknow through trilingual pixel art inspired by Mughal jali screens, chikankari motifs, and Indo-Islamic geometric patterns.</p>
+        <div class="banner-title" id="bannerTitle"></div>
+        <p class="subtitle">Lucknow Lattice is a generative sub-identity system for the city, using dynamic display typography and patterned backdrops driven by an interactive tool. The system maps four architectural motifs—Nawabi jali, Indo-Grecian floral, Colonial star, and Contemporary bloom—to specific neighborhoods based on historical density. Users control pattern mixing to reflect how architectural styles overlap across districts</p>
         <div class="links">
             <a href="#generator">Try the Generator</a>
             <a href="https://github.com" target="_blank">View on GitHub</a>
@@ -440,7 +558,7 @@
             <div class="control-group">
                 <label>English Headline</label>
                 <textarea id="textEnglish" maxlength="50" style="min-height: 80px;">LUCKNOW</textarea>
-                <small style="color: #9ca3af; margin-top: 4px; display: block;">Press Enter for line break</small>
+                <small style="color: #EBE1D8; margin-top: 4px; display: block;">Press Enter for line break</small>
             </div>
 
             <div class="control-group">
@@ -492,30 +610,62 @@
             <h2>Pattern Mix</h2>
 
             <div class="control-group">
-                <label>Jali Diamond</label>
+                <label><span class="pattern-icon" id="patternIcon1"></span>Contemporary - Gomtinagar/Indirinagar</label>
                 <input type="range" id="pattern1" min="0" max="100" step="5" value="25">
                 <div class="slider-value"><span id="pattern1Value">25</span>%</div>
             </div>
 
             <div class="control-group">
-                <label>Chikan Buti</label>
+                <label><span class="pattern-icon" id="patternIcon2"></span>Indo Indo-Grecian - Hazratganj/Kaiserbag/label>
                 <input type="range" id="pattern2" min="0" max="100" step="5" value="25">
                 <div class="slider-value"><span id="pattern2Value">25</span>%</div>
             </div>
 
             <div class="control-group">
-                <label>Eight-pointed Star</label>
+                <label><span class="pattern-icon" id="patternIcon3"></span>Nawabi Mughal - Chowk/Aminabad/Husainabad</label>
                 <input type="range" id="pattern3" min="0" max="100" step="5" value="25">
                 <div class="slider-value"><span id="pattern3Value">25</span>%</div>
             </div>
 
             <div class="control-group">
-                <label>Floral Star</label>
+                <label><span class="pattern-icon" id="patternIcon4"></span>Colonial - Civil lines/Residency</label>
                 <input type="range" id="pattern4" min="0" max="100" step="5" value="25">
                 <div class="slider-value"><span id="pattern4Value">25</span>%</div>
             </div>
 
-            <button class="download-btn" id="downloadBtn">Download</button>
+            <button class="download-btn" id="downloadBtn">Download Poster</button>
+
+            <div class="divider"></div>
+
+            <h2>Explore Lucknow</h2>
+            <p style="color: #EBE1D8; font-size: 12px; margin-bottom: 12px;">Each pattern represents a different architectural era and neighborhood of Lucknow.</p>
+            
+            <div class="control-group">
+                <label>Select Neighborhood</label>
+                <select id="neighborhoodSelect" style="width: 100%; padding: 10px; background: #E35645; border: 2px solid #ededed; border-radius: 4px; color: #e0e0e0; font-size: 14px;">
+                    <option value="">-- Choose a neighborhood --</option>
+                    <option value="nawabi"> Chowk / Husainabad (Nawabi/Mughal)</option>
+                    <option value="indogrecian"> Kaiserbagh / Hazratganj (Indo-Grecian)</option>
+                    <option value="colonial"> Civil Lines / Residency (Colonial British)</option>
+                    <option value="contemporary"> Gomti Nagar / Indira Nagar (Contemporary)</option>
+                </select>
+            </div>
+
+            <div id="neighborhoodInfo" class="neighborhood-info" style="display: none;">
+                <div class="info-header">
+                    <span class="pattern-icon-large" id="infoPatternIcon"></span>
+                    <div>
+                        <h3 id="infoTitle"></h3>
+                        <p id="infoStyle"></p>
+                    </div>
+                </div>
+                <p id="infoDescription"></p>
+                <div class="heritage-sites">
+                    <strong>Heritage Sites:</strong>
+                    <ul id="infoSites"></ul>
+                </div>
+                <button class="download-btn" id="applyNeighborhoodBtn" style="margin-top: 12px; background-color: #EBE1D8;">Apply This Style</button>
+            </div>
 
             <div class="info-text">
                 ✓ Full Grid Layout | ✓ Letter Cells in Different Color | ✓ Animated Background
@@ -530,9 +680,9 @@
 
     <script>
         const COLOR_PRESETS = {
-            backgrounds: ['#F59193', '#E35645', '#1D5E56', '#d0d0d0', '#fafafa'],
-            bgPatterns: ['#e8e8e8', '#d0d0d0', '#c0c0c0', '#b0b0b0', '#a0a0a0'],
-            letters: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f7b801', '#6c5ce7']
+            backgrounds: ['#E35645', '#1D5E56', '#E57A8C', '#EBE1D8', '#9CCAA6'],
+            bgPatterns: ['#E35645', '#1D5E56', '#E57A8C', '#EBE1D8', '#9CCAA6'],
+            letters: ['#E35645', '#1D5E56', '#E57A8C', '#EBE1D8', '#9CCAA6']
         };
 
         const PIXEL_SIZE_PRESETS = {
@@ -543,16 +693,145 @@
             5: { width: 50, height: 70 }
         };
 
-        const SVG_PATTERNS = {
+        let SVG_PATTERNS = {
             // Frame_14 - Diamond cutout
-            1: '<svg width="100%" height="100%" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><rect width="500" height="500" fill="white"/><path d="M500 500H0V0H500V500ZM20.2705 253.378L250 483.108L479.729 253.379L250 23.6484L20.2705 253.378Z" fill="{color}"/></svg>',
+            1: '<svg width="100%" height="100%" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><rect width="500" height="500" fill="{bgColor}"/><path d="M500 500H0V0H500V500ZM20.2705 253.378L250 483.108L479.729 253.379L250 23.6484L20.2705 253.378Z" fill="{color}"/></svg>',
             // Frame_15 - Four petal flower
-            2: '<svg width="100%" height="100%" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><rect width="500" height="500" fill="white"/><path d="M249.999 0C315.598 28.6621 358 74.1707 358 125.415C358 131.609 357.378 137.719 356.173 143.727C362.157 142.531 368.244 141.914 374.414 141.914C425.658 141.914 471.166 184.315 499.828 249.913C471.166 315.512 425.657 357.914 374.413 357.914C368.243 357.914 362.157 357.297 356.173 356.102C357.378 362.109 358 368.22 358 374.415C358 425.659 315.6 471.167 250.002 499.829C184.402 471.167 142 425.659 142 374.414C142 368.207 142.623 362.084 143.833 356.065C137.791 357.285 131.645 357.914 125.414 357.914C74.1705 357.914 28.6621 315.514 0 249.916C28.662 184.316 74.1705 141.914 125.415 141.914C131.646 141.914 137.792 142.542 143.833 143.762C142.623 137.743 142 131.621 142 125.414C142 74.1702 184.401 28.6621 249.999 0Z" fill="{color}"/></svg>',
+            2: '<svg width="100%" height="100%" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><rect width="500" height="500" fill="{bgColor}"/><path d="M249.999 0C315.598 28.6621 358 74.1707 358 125.415C358 131.609 357.378 137.719 356.173 143.727C362.157 142.531 368.244 141.914 374.414 141.914C425.658 141.914 471.166 184.315 499.828 249.913C471.166 315.512 425.657 357.914 374.413 357.914C368.243 357.914 362.157 357.297 356.173 356.102C357.378 362.109 358 368.22 358 374.415C358 425.659 315.6 471.167 250.002 499.829C184.402 471.167 142 425.659 142 374.414C142 368.207 142.623 362.084 143.833 356.065C137.791 357.285 131.645 357.914 125.414 357.914C74.1705 357.914 28.6621 315.514 0 249.916C28.662 184.316 74.1705 141.914 125.415 141.914C131.646 141.914 137.792 142.542 143.833 143.762C142.623 137.743 142 131.621 142 125.414C142 74.1702 184.401 28.6621 249.999 0Z" fill="{color}"/></svg>',
             // Frame_16 - Eight-pointed star (overlapping squares)
-            3: '<svg width="100%" height="100%" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><rect width="500" height="500" fill="white"/><rect x="73.2236" y="73.2126" width="353.555" height="353.584" fill="{color}"/><rect width="353.568" height="353.568" transform="matrix(0.707077 0.707136 -0.707077 0.707136 250.001 -0.0174561)" fill="{color}"/></svg>',
+            3: '<svg width="100%" height="100%" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><rect width="500" height="500" fill="{bgColor}"/><rect x="73.2236" y="73.2126" width="353.555" height="353.584" fill="{color}"/><rect width="353.568" height="353.568" transform="matrix(0.707077 0.707136 -0.707077 0.707136 250.001 -0.0174561)" fill="{color}"/></svg>',
             // Frame_24 - Floral star with inner petals
-            4: '<svg width="100%" height="100%" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><rect width="500" height="500" fill="white"/><path d="M500 249.966C499.19 253.106 496.661 253.714 494.064 254.018C484.183 255.098 474.639 257.461 465.634 261.749C425.367 280.959 396.735 310.837 382.132 353.477C380.547 358.069 379.805 362.897 379.333 367.758C378.76 373.869 374.713 378.46 368.71 379.068C348.239 381.229 330.804 390.479 314.38 402.026C289.086 419.818 270.943 443.315 259.375 471.978C257.014 477.853 255.564 483.997 254.755 490.277C254.485 492.505 254.013 494.733 253.406 496.894C252.967 498.447 252.057 500 250.101 499.966C248.178 499.966 247.369 498.447 246.796 496.86C246.56 496.252 246.222 495.679 246.189 495.071C244.368 473.835 234.79 455.841 222.784 438.825C205.011 413.707 181.674 395.679 153.21 384.2C147.342 381.837 141.272 380.182 134.965 379.473C124.78 378.325 121.914 375.354 120.531 365.024C118.305 348.447 111.021 333.896 102.016 320.088C83.2317 291.222 57.9046 270.459 25.6302 258.305C19.3912 255.942 12.8486 254.794 6.2386 254.018C4.75472 253.849 3.33829 253.646 2.09048 252.802C-0.607485 250.945 -0.742383 248.953 2.05675 247.13C2.96732 246.523 4.11395 246.117 5.19314 245.982C28.2944 243.788 47.6186 232.917 65.5938 219.21C89.4708 200.979 106.637 177.718 117.024 149.494C118.811 144.632 119.991 139.568 120.565 134.402C121.61 124.814 124.949 121.573 134.527 120.493C150.984 118.602 165.351 111.344 179.111 102.6C206.293 85.3477 226.021 61.715 239.241 32.4781C242.917 24.3079 245.042 15.6313 246.088 6.71843C246.189 5.90817 246.088 5.06415 246.357 4.3214C246.964 2.32951 247.605 0 250.202 0C252.529 0 253.203 2.1607 253.912 3.98379C254.08 4.42269 254.148 4.9291 254.181 5.40176C256.137 26.2323 265.445 44.0243 277.249 60.7022C295.797 86.9345 320.113 105.773 350.263 116.88C355.557 118.839 361.088 120.358 366.821 120.527C373.735 120.695 379.063 126.907 379.67 133.592C381.222 150.608 388.877 165.429 398.017 179.541C416.767 208.406 441.993 229.237 474.2 241.492C480.608 243.923 487.285 245.003 494.064 245.881C496.661 246.219 499.224 246.759 500 249.932V249.966Z" fill="{color}"/></svg>'
+            4: '<svg width="100%" height="100%" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><rect width="500" height="500" fill="{bgColor}"/><path d="M500 249.966C499.19 253.106 496.661 253.714 494.064 254.018C484.183 255.098 474.639 257.461 465.634 261.749C425.367 280.959 396.735 310.837 382.132 353.477C380.547 358.069 379.805 362.897 379.333 367.758C378.76 373.869 374.713 378.46 368.71 379.068C348.239 381.229 330.804 390.479 314.38 402.026C289.086 419.818 270.943 443.315 259.375 471.978C257.014 477.853 255.564 483.997 254.755 490.277C254.485 492.505 254.013 494.733 253.406 496.894C252.967 498.447 252.057 500 250.101 499.966C248.178 499.966 247.369 498.447 246.796 496.86C246.56 496.252 246.222 495.679 246.189 495.071C244.368 473.835 234.79 455.841 222.784 438.825C205.011 413.707 181.674 395.679 153.21 384.2C147.342 381.837 141.272 380.182 134.965 379.473C124.78 378.325 121.914 375.354 120.531 365.024C118.305 348.447 111.021 333.896 102.016 320.088C83.2317 291.222 57.9046 270.459 25.6302 258.305C19.3912 255.942 12.8486 254.794 6.2386 254.018C4.75472 253.849 3.33829 253.646 2.09048 252.802C-0.607485 250.945 -0.742383 248.953 2.05675 247.13C2.96732 246.523 4.11395 246.117 5.19314 245.982C28.2944 243.788 47.6186 232.917 65.5938 219.21C89.4708 200.979 106.637 177.718 117.024 149.494C118.811 144.632 119.991 139.568 120.565 134.402C121.61 124.814 124.949 121.573 134.527 120.493C150.984 118.602 165.351 111.344 179.111 102.6C206.293 85.3477 226.021 61.715 239.241 32.4781C242.917 24.3079 245.042 15.6313 246.088 6.71843C246.189 5.90817 246.088 5.06415 246.357 4.3214C246.964 2.32951 247.605 0 250.202 0C252.529 0 253.203 2.1607 253.912 3.98379C254.08 4.42269 254.148 4.9291 254.181 5.40176C256.137 26.2323 265.445 44.0243 277.249 60.7022C295.797 86.9345 320.113 105.773 350.263 116.88C355.557 118.839 361.088 120.358 366.821 120.527C373.735 120.695 379.063 126.907 379.67 133.592C381.222 150.608 388.877 165.429 398.017 179.541C416.767 208.406 441.993 229.237 474.2 241.492C480.608 243.923 487.285 245.003 494.064 245.881C496.661 246.219 499.224 246.759 500 249.932V249.966Z" fill="{color}"/></svg>'
         };
+
+        // Store default patterns for reset
+        const DEFAULT_SVG_PATTERNS = JSON.parse(JSON.stringify(SVG_PATTERNS));
+
+        // Render static banner heading with patterns (no animation)
+        function renderBannerTitle() {
+            const container = document.getElementById('bannerTitle');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            const line1 = 'LUCKNOW LATTICE';
+            const line2 = 'POSTCARD GENERATOR';
+            const letterColor = '#EBE1D8';
+            
+            // Create separate canvas for banner
+            const bannerCanvas = document.createElement('canvas');
+            const ctx = bannerCanvas.getContext('2d');
+            bannerCanvas.width = 600;
+            bannerCanvas.height = 100;
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, bannerCanvas.width, bannerCanvas.height);
+            ctx.fillStyle = '#000000';
+            ctx.font = 'bold 18px Pixelify Sans, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(line1, bannerCanvas.width / 2, 40);
+            ctx.fillText(line2, bannerCanvas.width / 2, 60);
+            
+            const imageData = ctx.getImageData(0, 0, bannerCanvas.width, bannerCanvas.height);
+            const pixels = imageData.data;
+            
+            // Find text bounds
+            let minX = bannerCanvas.width, maxX = 0, minY = bannerCanvas.height, maxY = 0;
+            for (let y = 0; y < bannerCanvas.height; y++) {
+                for (let x = 0; x < bannerCanvas.width; x++) {
+                    const idx = (y * bannerCanvas.width + x) * 4;
+                    if (pixels[idx] < 128) {
+                        minX = Math.min(minX, x);
+                        maxX = Math.max(maxX, x);
+                        minY = Math.min(minY, y);
+                        maxY = Math.max(maxY, y);
+                    }
+                }
+            }
+            
+            if (minX >= maxX || minY >= maxY) return;
+            
+            // Sample at lower resolution for pixel effect
+            const sampleRate = 2;
+            const gridWidth = Math.ceil((maxX - minX) / sampleRate);
+            const gridHeight = Math.ceil((maxY - minY) / sampleRate);
+            
+            container.style.gridTemplateColumns = `repeat(${gridWidth}, 1fr)`;
+            container.style.gridTemplateRows = `repeat(${gridHeight}, 1fr)`;
+            
+            // Create cells - only show patterns where there are letters
+            for (let row = 0; row < gridHeight; row++) {
+                for (let col = 0; col < gridWidth; col++) {
+                    const sampleX = minX + col * sampleRate;
+                    const sampleY = minY + row * sampleRate;
+                    const idx = (Math.floor(sampleY) * bannerCanvas.width + Math.floor(sampleX)) * 4;
+                    
+                    const cell = document.createElement('div');
+                    cell.className = 'banner-cell';
+                    
+                    if (pixels[idx] < 128) {
+                        // Letter pixel - show random pattern
+                        const patternNum = Math.floor(Math.random() * 4) + 1;
+                        const svg = generatePattern(patternNum, letterColor, 'transparent');
+                        cell.style.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`;
+                        
+                        // Store position for ripple effect
+                        cell.dataset.row = row;
+                        cell.dataset.col = col;
+                        
+                        // Set random spread direction for hover effect
+                        const spreadX = (Math.random() - 0.5) * 12;
+                        const spreadY = (Math.random() - 0.5) * 12;
+                        cell.dataset.spreadX = spreadX;
+                        cell.dataset.spreadY = spreadY;
+                    }
+                    
+                    container.appendChild(cell);
+                }
+            }
+            
+            // Add ripple hover effect
+            const allCells = container.querySelectorAll('.banner-cell');
+            
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                
+                const cellWidth = rect.width / gridWidth;
+                const cellHeight = rect.height / gridHeight;
+                
+                allCells.forEach(cell => {
+                    if (!cell.dataset.row) return;
+                    
+                    const cellCenterX = (parseInt(cell.dataset.col) + 0.5) * cellWidth;
+                    const cellCenterY = (parseInt(cell.dataset.row) + 0.5) * cellHeight;
+                    
+                    const distance = Math.sqrt(
+                        Math.pow(mouseX - cellCenterX, 2) + 
+                        Math.pow(mouseY - cellCenterY, 2)
+                    );
+                    
+                    const maxDistance = 50; // Radius of effect
+                    
+                    if (distance < maxDistance) {
+                        const intensity = 1 - (distance / maxDistance);
+                        const spreadX = parseFloat(cell.dataset.spreadX) * intensity;
+                        const spreadY = parseFloat(cell.dataset.spreadY) * intensity;
+                        cell.style.transform = `translate(${spreadX}px, ${spreadY}px)`;
+                    } else {
+                        cell.style.transform = 'translate(0, 0)';
+                    }
+                });
+            });
+            
+            container.addEventListener('mouseleave', () => {
+                allCells.forEach(cell => {
+                    cell.style.transform = 'translate(0, 0)';
+                });
+            });
+        }
 
         const state = {
             textEnglish: 'LUCKNOW',
@@ -568,9 +847,9 @@
             bgGridAnimationInterval: null
         };
 
-        function generatePattern(patternNum, color) {
+        function generatePattern(patternNum, color, bgColor) {
             const svg = SVG_PATTERNS[patternNum];
-            return svg.replace(/{color}/g, color);
+            return svg.replace(/{color}/g, color).replace(/{bgColor}/g, bgColor);
         }
 
         function getRandomPattern() {
@@ -676,7 +955,7 @@
                 const englishLines = state.textEnglish.split('\n');
                 for (const line of englishLines) {
                     if (!line.trim()) continue;
-                    const gridData = renderTextToGrid(line.toUpperCase(), 'Pixelify Sans', 18);
+                    const gridData = renderTextToGrid(line.toUpperCase(), 'Courier', 18);
                     if (gridData) {
                         const { grid } = gridData;
                         let currentCol = Math.max(0, Math.floor((GRID_WIDTH - grid[0].length) / 2));
@@ -737,12 +1016,12 @@
                 
                 if (state.letterPositions.has(i)) {
                     cell.classList.add('letter');
-                    const svg = generatePattern(pattern, state.letterColor);
+                    const svg = generatePattern(pattern, state.letterColor, state.bgColor);
                     const dataUrl = `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`;
                     cell.style.backgroundImage = dataUrl;
                 } else {
                     // For background, use the selected background pattern color
-                    const svg = generatePattern(pattern, state.bgPatternColor);
+                    const svg = generatePattern(pattern, state.bgPatternColor, state.bgColor);
                     const dataUrl = `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`;
                     cell.style.backgroundImage = dataUrl;
                 }
@@ -785,7 +1064,7 @@
             for (let i = 0; i < numChanges; i++) {
                 const idx = Math.floor(Math.random() * bgCells.length);
                 const pattern = getRandomPattern();
-                const svg = generatePattern(pattern, state.bgPatternColor);
+                const svg = generatePattern(pattern, state.bgPatternColor, state.bgColor);
                 const dataUrl = `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`;
                 bgCells[idx].style.backgroundImage = dataUrl;
             }
@@ -1031,10 +1310,126 @@
             startAnimation();
         });
 
-        setTimeout(() => {
-            createColorPresets();
+        // Neighborhood and Architecture Data
+        const NEIGHBORHOOD_DATA = {
+            nawabi: {
+                title: 'Chowk / Husainabad',
+                style: 'Nawabi & Mughal Architecture',
+                pattern: 3,
+                description: 'The heart of old Lucknow, featuring intricate Mughal-era architecture with ornate jali screens, arched doorways, and geometric precision reflecting the grandeur of the Nawabi period.',
+                sites: ['Bara Imambara', 'Rumi Darwaza', 'Chhota Imambara', 'Jama Masjid'],
+                color: '#f7b801'
+            },
+            indogrecian: {
+                title: 'Kaiserbagh / Hazratganj',
+                style: 'Indo-Grecian Architecture',
+                pattern: 2,
+                description: 'A unique fusion of European classical elements with Indian aesthetics, featuring Corinthian columns, floral motifs, and symmetrical designs from the late Nawabi period.',
+                sites: ['La Martiniere College', 'Dilkusha Kothi', 'Constantia', 'Kaiserbagh Palace'],
+                color: '#4ecdc4'
+            },
+            colonial: {
+                title: 'Civil Lines / Residency',
+                style: 'Colonial British Architecture',
+                pattern: 4,
+                description: 'British colonial influence featuring geometric patterns, Victorian Gothic elements, and structured layouts that blend European sensibilities with Indian craftsmanship.',
+                sites: ['British Residency', 'GPO Building', 'High Court', 'Christ Church'],
+                color: '#ff6b6b'
+            },
+            contemporary: {
+                title: 'Gomti Nagar / Indira Nagar',
+                style: 'Contemporary Architecture',
+                pattern: 1,
+                description: 'Modern Lucknow showcasing contemporary design with elements inspired by traditional motifs, representing the city\'s evolution while honoring its heritage.',
+                sites: ['Ambedkar Memorial Park', 'Gomti Riverfront', 'Janeshwar Mishra Park', 'Phoenix Palassio'],
+                color: '#6c5ce7'
+            }
+        };
+
+        function showNeighborhoodInfo(neighborhood) {
+            const info = NEIGHBORHOOD_DATA[neighborhood];
+            if (!info) {
+                document.getElementById('neighborhoodInfo').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('infoTitle').textContent = info.title;
+            document.getElementById('infoStyle').textContent = info.style;
+            document.getElementById('infoDescription').textContent = info.description;
+            
+            const sitesList = document.getElementById('infoSites');
+            sitesList.innerHTML = info.sites.map(site => `<li>${site}</li>`).join('');
+            
+            const patternIcon = document.getElementById('infoPatternIcon');
+            const svg = generatePattern(info.pattern, info.color, 'transparent');
+            patternIcon.style.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`;
+            
+            document.getElementById('neighborhoodInfo').style.display = 'block';
+        }
+
+        function applyNeighborhoodStyle() {
+            const select = document.getElementById('neighborhoodSelect');
+            const neighborhood = select.value;
+            const info = NEIGHBORHOOD_DATA[neighborhood];
+            
+            if (!info) return;
+            
+            // Set the corresponding pattern to 100% and others to 0%
+            state.patterns.pattern1 = info.pattern === 1 ? 100 : 0;
+            state.patterns.pattern2 = info.pattern === 2 ? 100 : 0;
+            state.patterns.pattern3 = info.pattern === 3 ? 100 : 0;
+            state.patterns.pattern4 = info.pattern === 4 ? 100 : 0;
+            
+            // Update sliders
+            document.getElementById('pattern1').value = state.patterns.pattern1;
+            document.getElementById('pattern2').value = state.patterns.pattern2;
+            document.getElementById('pattern3').value = state.patterns.pattern3;
+            document.getElementById('pattern4').value = state.patterns.pattern4;
+            document.getElementById('pattern1Value').textContent = state.patterns.pattern1;
+            document.getElementById('pattern2Value').textContent = state.patterns.pattern2;
+            document.getElementById('pattern3Value').textContent = state.patterns.pattern3;
+            document.getElementById('pattern4Value').textContent = state.patterns.pattern4;
+            
+            // Set letter color to match neighborhood
+            state.letterColor = info.color;
+            
+            // Update color preset buttons
+            const letterContainer = document.getElementById('letterColorPresets');
+            letterContainer.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.style.backgroundColor === info.color);
+            });
+            
             render();
-        }, 500);
+        }
+
+        document.fonts.ready.then(() => {
+            createColorPresets();
+            renderBannerTitle();
+            
+            // Set pattern icons with tooltips
+            const tooltips = {
+                1: 'Contemporary — Gomti Nagar, Indira Nagar',
+                2: 'Indo-Grecian — Kaiserbagh, Hazratganj',
+                3: 'Nawabi/Mughal — Chowk, Husainabad',
+                4: 'Colonial British — Civil Lines, Residency'
+            };
+            
+            for (let i = 1; i <= 4; i++) {
+                const icon = document.getElementById(`patternIcon${i}`);
+                const svg = generatePattern(i, '#4ecdc4', 'transparent');
+                icon.style.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`;
+                icon.setAttribute('data-tooltip', tooltips[i]);
+            }
+            
+            // Neighborhood selector event listeners
+            document.getElementById('neighborhoodSelect').addEventListener('change', (e) => {
+                showNeighborhoodInfo(e.target.value);
+            });
+            
+            document.getElementById('applyNeighborhoodBtn').addEventListener('click', applyNeighborhoodStyle);
+            
+            render();
+        });
     </script>
 </body>
 </html>
